@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Шум как экологический фактор</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+
+<style>
+:root{
+  --bg:#020617;
+  --card:rgba(255,255,255,0.06);
+  --stroke:rgba(255,255,255,0.08);
+  --accent:#38bdf8;
+  --accent2:#22c55e;
+  --text:#e5e7eb;
+  --muted:#94a3b8;
+}
+
+*{box-sizing:border-box}
+body{
+  margin:0;
+  font-family:'Inter',sans-serif;
+  color:var(--text);
+  background:radial-gradient(circle at top, #0b1220, #020617 60%);
+  overflow-x:hidden;
+}
+
+html{scroll-behavior:smooth}
+
+/* DECOR BACKGROUND BLURS (side atmosphere) */
+body::before, body::after{
+  content:"";
+  position:fixed;
+  width:400px;
+  height:400px;
+  border-radius:50%;
+  filter:blur(120px);
+  z-index:-1;
+  opacity:0.35;
+}
+body::before{
+  background:var(--accent);
+  top:20%; left:-120px;
+}
+body::after{
+  background:var(--accent2);
+  bottom:10%; right:-120px;
+}
+
+nav{
+  position:fixed;
+  top:0;
+  width:100%;
+  z-index:1000;
+  background:rgba(2,6,23,0.6);
+  backdrop-filter:blur(14px);
+  border-bottom:1px solid var(--stroke);
+}
+.nav-container{
+  max-width:1200px;
+  margin:auto;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  padding:14px 20px;
+}
+.nav-title{font-weight:800;color:var(--accent)}
+.nav-links a{color:var(--muted);margin-left:22px;text-decoration:none;font-size:14px}
+.nav-links a:hover{color:var(--accent)}
+
+header{
+  max-width:900px;
+  margin:140px auto 80px;
+  text-align:center;
+  padding:0 20px;
+}
+header h1{
+  font-size:54px;
+  line-height:1.1;
+  font-weight:800;
+  background:linear-gradient(90deg,var(--accent),var(--accent2));
+  -webkit-background-clip:text;
+  -webkit-text-fill-color:transparent;
+}
+header p{
+  color:var(--muted);
+  font-size:18px;
+  margin-top:14px;
+  line-height:1.7;
+}
+
+.cta a{
+  display:inline-block;
+  margin-top:20px;
+  padding:12px 18px;
+  border-radius:12px;
+  background:linear-gradient(90deg,var(--accent),var(--accent2));
+  color:#001018;
+  font-weight:700;
+  text-decoration:none;
+}
+
+.container{
+  max-width:1100px;
+  margin:auto;
+  padding:0 20px 80px;
+}
+
+section{
+  margin-bottom:100px;
+  opacity:0;
+  transform:translateY(40px);
+  transition:0.7s;
+}
+section.visible{opacity:1;transform:translateY(0)}
+
+h2{font-size:32px;margin-bottom:14px}
+p{color:var(--muted);line-height:1.8}
+
+.grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(240px,1fr));
+  gap:18px;
+  margin-top:20px;
+}
+
+.card{
+  background:var(--card);
+  border:1px solid var(--stroke);
+  padding:18px;
+  border-radius:16px;
+  backdrop-filter:blur(10px);
+  transition:0.3s;
+}
+.card:hover{
+  transform:translateY(-6px);
+  border-color:rgba(56,189,248,0.4);
+}
+
+.fact{
+  margin-top:10px;
+  padding:14px;
+  border-radius:14px;
+  background:linear-gradient(135deg, rgba(56,189,248,0.12), rgba(34,197,94,0.08));
+  border:1px solid var(--stroke);
+  font-size:14px;
+  color:#cbd5e1;
+  line-height:1.6;
+}
+
+/* ENHANCED SURVEY VISUAL */
+.bar{
+  margin:14px 0;
+}
+.bar span{
+  font-size:14px;
+  color:var(--muted);
+}
+.bar-line{
+  height:12px;
+  border-radius:20px;
+  margin-top:6px;
+  background:linear-gradient(90deg,var(--accent),var(--accent2));
+  box-shadow:0 0 20px rgba(56,189,248,0.25);
+}
+
+footer{
+  text-align:center;
+  padding:40px;
+  color:var(--muted);
+  border-top:1px solid var(--stroke);
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-container">
+    <div class="nav-title">Экология шума</div>
+    <div class="nav-links">
+      <a href="#theory">Теория</a>
+      <a href="#facts">Факты</a>
+      <a href="#impact">Влияние</a>
+      <a href="#survey">Исследование</a>
+      <a href="#solutions">Решения</a>
+    </div>
+  </div>
+</nav>
+
+<header>
+  <h1>Шум — невидимый загрязнитель окружающей среды</h1>
+  <p>
+    По данным ВОЗ, длительное воздействие шума выше 55 дБ является фактором риска,
+    влияющим на здоровье миллионов людей в городах. Постоянный акустический фон
+    формирует хронический стресс, который человек часто даже не осознаёт.
+  </p>
+  <div class="cta"><a href="#theory">Начать изучение</a></div>
+</header>
+
+<div class="container">
+
+<section id="theory">
+  <h2>Что такое шум?</h2>
+  <p>
+    Шум — это сложная смесь звуковых волн различной частоты и амплитуды, которая
+    не несёт полезной информации для слуховой системы человека. В отличие от музыкального
+    звука, шум не имеет гармонической структуры и воспринимается мозгом как раздражающий сигнал.
+  </p>
+  <p>
+    С физиологической точки зрения шум активирует стрессовые центры мозга, заставляя
+    организм реагировать так, будто он находится в опасности. Это приводит к постоянной
+    активации симпатической нервной системы.
+  </p>
+
+  <div class="grid">
+    <div class="card">
+      <h3>Транспортный шум</h3>
+      <p>60–90 дБ</p>
+      <div class="fact">
+        Основной источник городской акустической нагрузки. На оживлённых дорогах уровень шума
+        может превышать 85 дБ, что сопоставимо с работой пылесоса вблизи уха.
+        Длительное воздействие вызывает утомление слухового аппарата и снижение концентрации.
+      </div>
+    </div>
+
+    <div class="card">
+      <h3>Городская среда</h3>
+      <p>55–70 дБ</p>
+      <div class="fact">
+        Включает фоновый шум улиц, разговоры людей, строительные работы и бытовую активность.
+        Даже если человек не замечает шум сознательно, мозг продолжает его обрабатывать,
+        что увеличивает когнитивную нагрузку.
+      </div>
+    </div>
+
+    <div class="card">
+      <h3>Промышленность</h3>
+      <p>80–110 дБ</p>
+      <div class="fact">
+        Один из самых опасных типов шума. На производстве уровень может достигать порогов,
+        при которых без защиты слуха возможны необратимые изменения слухового аппарата.
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="facts">
+  <h2>Научные факты</h2>
+  <div class="grid">
+    <div class="card">
+      <h3>Сон</h3>
+      <div class="fact">Ночной шум даже низкой интенсивности нарушает глубокие фазы сна.</div>
+    </div>
+    <div class="card">
+      <h3>Сердце</h3>
+      <div class="fact">Хронический шум увеличивает риск сердечно-сосудистых заболеваний.</div>
+    </div>
+    <div class="card">
+      <h3>Экосистемы</h3>
+      <div class="fact">Животные теряют способность к коммуникации и ориентации.</div>
+    </div>
+  </div>
+</section>
+
+<section id="survey">
+  <h2>Результаты исследования (расширенный анализ)</h2>
+
+  <p>
+    В исследовании приняли участие 45 человек различных возрастных групп (от 14 до 60 лет).
+    Основная цель — выявить не только субъективное восприятие шума, но и его влияние
+    на повседневное поведение, работоспособность и эмоциональное состояние.
+  </p>
+
+  <p>
+    Результаты показали, что шум является не эпизодическим, а постоянным фактором воздействия.
+    Более 70% участников отметили, что шум присутствует в их жизни ежедневно и практически
+    не имеет «тихих периодов», особенно в городских условиях.
+  </p>
+
+  <div class="bar"><span>Постоянный стресс из-за шума — 77%</span><div class="bar-line" style="width:77%"></div></div>
+  <div class="bar"><span>Нарушения сна — 73%</span><div class="bar-line" style="width:73%"></div></div>
+  <div class="bar"><span>Снижение концентрации — 68%</span><div class="bar-line" style="width:68%"></div></div>
+  <div class="bar"><span>Общее ухудшение самочувствия — 80%</span><div class="bar-line" style="width:80%"></div></div>
+
+  <p>
+    Интерпретация данных показывает, что шум влияет не только на физическое здоровье,
+    но и на когнитивные функции. Особенно часто участники отмечали усталость,
+    раздражительность и снижение продуктивности в течение дня.
+  </p>
+
+  <p>
+    Важно отметить, что даже те респонденты, которые не считают шум серьёзной проблемой,
+    демонстрируют признаки его воздействия косвенно — через ухудшение сна и повышенную утомляемость.
+  </p>
+</section>
+
+<section id="solutions">
+  <h2>Возможные решения (расширенный обзор)</h2>
+
+  <p>
+    Проблема шумового загрязнения требует комплексного подхода, включающего архитектурные,
+    технологические и социальные меры.
+  </p>
+
+  <div class="grid">
+    <div class="card">
+      <h3>Архитектура и город</h3>
+      <div class="fact">
+        Использование шумозащитных экранов, правильное зонирование дорог и жилых районов,
+        а также увеличение зелёных насаждений, которые поглощают звуковые волны.
+      </div>
+    </div>
+
+    <div class="card">
+      <h3>Технологии</h3>
+      <div class="fact">
+        Развитие электромобилей, бесшумных двигателей и систем активного шумоподавления
+        позволяет снижать уровень городского шума на уровне источника.
+      </div>
+    </div>
+
+    <div class="card">
+      <h3>Законодательство</h3>
+      <div class="fact">
+        Введение строгих норм по допустимому уровню шума и контроль их соблюдения
+        в жилых и промышленных зонах.
+      </div>
+    </div>
+
+    <div class="card">
+      <h3>Личное поведение</h3>
+      <div class="fact">
+        Использование наушников с шумоподавлением, соблюдение тишины в ночное время
+        и повышение осведомлённости о проблеме.
+      </div>
+    </div>
+  </div>
+</section>
+
+</div>
+
+<footer>
+  Кинов Батый • 2026
+</footer>
+
+<script>
+const sections=document.querySelectorAll('section');
+const observer=new IntersectionObserver(entries=>{
+  entries.forEach(e=>{
+    if(e.isIntersecting)e.target.classList.add('visible');
+  });
+},{threshold:0.15});
+sections.forEach(s=>observer.observe(s));
+</script>
+
+</body>
+</html>
